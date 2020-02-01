@@ -19,15 +19,15 @@ composer() {
 
 artisan() {
     arr=("$@")
-    docker exec lnk_php_1 php artisan ${arr[@]}
+    docker exec __PROJECT___php_1 php artisan ${arr[@]}
 }
 
 mysql() {
-    docker exec -it lnk_mariadb_1 bash
+    docker exec -it __PROJECT___mariadb_1 bash
 }
 
 exec() {
-    container="lnk_$1_1"
+    container="__PROJECT___$1_1"
     shift
     arr=("$@")
     docker exec $container ${arr[@]}
