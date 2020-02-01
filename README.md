@@ -28,5 +28,6 @@ make run
 
 Execute:
 ```
+$ cd name
 $ setup name
 ```
