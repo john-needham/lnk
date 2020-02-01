@@ -1,0 +1,44 @@
+version: '3.0'
+
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - 80:80
+        depends_on:
+            - php
+        volumes:
+            - .:/app/:cached
+            - ./etc/nginx/site.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            default:
+                aliases:
+                    - blank.local
+
+    php:
+        build: ./docker/dockerfile/php
+        working_dir: /app
+        depends_on:
+            - mariadb
+        volumes:
+            - .:/app/:cached
+            - ./docker/volumes/php/composer:/root/.composer:cached
+
+    mariadb:
+        image: mariadb:10.3.7
+        ports:
+            - 3306:3306
+        volumes:
+            - ./docker/volumes/mariadb/data:/var/lib/mariadb
+        container_name: blankdb
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: blank
+            MYSQL_USER: blank
+            MYSQL_PASSWORD: password
+
+    composer:
+        image: composer:latest
+        command: install
+        volumes:
+            - .:/app/
