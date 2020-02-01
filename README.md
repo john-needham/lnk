@@ -25,3 +25,8 @@ mv ./tmp/* ./
 rm ./tmp
 make run
 ```
+
+Execute:
+```
+$ setup name
+```
