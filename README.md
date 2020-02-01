@@ -24,6 +24,13 @@ shopt -s dotglob
 mv ./tmp/* ./
 rm ./tmp
 make run
+
+echo "## setup-sctipt-project: ${PROJECT}"  | sudo tee -a /etc/hosts
+echo "127.0.0.1 ${PROJECT}.local" | sudo tee -a /etc/hosts
+echo "## setup-sctipt-project-end"  | sudo tee -a /etc/hosts
+
+echo "Broswe to http://${PROJECT}.local"
+
 ```
 
 Execute:
