@@ -25,6 +25,7 @@ make run
 
 echo "## setup-sctipt-project: ${PROJECT}"  | sudo tee -a /etc/hosts
 echo "127.0.0.1 ${PROJECT}.local" | sudo tee -a /etc/hosts
+echo "## setup-sctipt-project-end" | sudo tee -a /etc/hosts
 echo "" | sudo tee -a /etc/hosts
 
 echo "Browse to http://${PROJECT}.local"
