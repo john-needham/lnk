@@ -14,20 +14,20 @@ stop() {
 
 composer() {
     arr=("$@")
-    docker run --rm --interactive --tty --volume $PWD:/app __PROJECT___composer ${arr[@]}
+    docker run --rm --interactive --tty --volume $PWD:/app lnk_composer ${arr[@]}
 }
 
 artisan() {
     arr=("$@")
-    docker exec __PROJECT___php_1 php artisan ${arr[@]}
+    docker exec lnk_php_1 php artisan ${arr[@]}
 }
 
 mysql() {
-    docker exec -it __PROJECT___db_1 bash
+    docker exec -it lnk_db_1 bash
 }
 
 exec() {
-    container="__PROJECT___$1_1"
+    container="lnk_$1_1"
     shift
     arr=("$@")
     docker exec $container ${arr[@]}

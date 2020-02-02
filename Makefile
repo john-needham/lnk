@@ -3,13 +3,13 @@ build:
 	@make -s clean
 
 run:
-	docker-compose up -d --build __PROJECT___nginx __PROJECT___php __PROJECT___composer __PROJECT___db
+	docker-compose up -d --build lnk_nginx lnk_php lnk_composer lnk_db
 
 stop:
 	@docker-compose stop
 
 project:
-	docker-compose run __PROJECT___composer sh -c "composer create-project --prefer-dist laravel/laravel tmp"
+	docker-compose run lnk_composer sh -c "composer create-project --prefer-dist laravel/laravel tmp"
 
 restart: stop run
 
