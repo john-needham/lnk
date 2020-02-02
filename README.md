@@ -12,4 +12,4 @@ Execute, it'll request password to configure the hostfile:
 $ setup name
 ```
 
-Browse to `http://_name_.local`
+Browse to http://_name_.local
