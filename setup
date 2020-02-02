@@ -2,10 +2,15 @@
 
 if [ $# -eq 0 ]
   then
-    echo "No project name supplied"
+    echo "No project name supplied."
 fi
 
 PROJECT=$1;
+
+if [ -d "./$PROJECT" ]; then
+    echo "Folder exists already [$PROJECT]."
+    exit;
+fi
 
 echo "Setting up $PROJECT ..."
 
