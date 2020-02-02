@@ -5,12 +5,17 @@ if [ $# -eq 0 ]
     echo "No project name supplied."
 fi
 
+DIR_PATH=$(pwd)
+
 PROJECT=$1;
+PROJECT_PATH="${DIR_PATH}/${PROJECT}"
 
 if [ -d "./$PROJECT" ]; then
     echo "Folder exists already [$PROJECT]."
     exit;
 fi
+
+echo $PROJECT_PATH
 
 echo "Setting up $PROJECT ..."
 
@@ -24,18 +29,18 @@ git clone git@github.com:john-needham/laravel-setup.git .
 TEMPLATE="__PROJECT__"
 
 # remove setup script from laravel-setup, we dont need it
-rm ./setup
+rm "${PROJECT_PATH}/setup"
 
-sed -i '' "s/${TEMPLATE}/${PROJECT}/g" ./docker-compose.yml
-sed -i '' "s/${TEMPLATE}/${PROJECT}/g" ./Makefile
-sed -i '' "s/${TEMPLATE}/${PROJECT}/g" ./infra/etc/nginx/site.conf
-sed -i '' "s/${TEMPLATE}/${PROJECT}/g" ./cmd
+sed -i '' "s/${TEMPLATE}/${PROJECT}/g" "${PROJECT_PATH}/docker-compose.yml"
+sed -i '' "s/${TEMPLATE}/${PROJECT}/g" "${PROJECT_PATH}/Makefile"
+sed -i '' "s/${TEMPLATE}/${PROJECT}/g" "${PROJECT_PATH}/infra/etc/nginx/site.conf"
+sed -i '' "s/${TEMPLATE}/${PROJECT}/g" "${PROJECT_PATH}/cmd"
 
 make build
 make project tmp=tmp
 shopt -s dotglob
-mv ./tmp/* ./
-rm ./tmp
+mv "${PROJECT_PATH}/tmp/*" "${PROJECT_PATH}/"
+rm "${PROJECT_PATH}/tmp"
 make run
 
 if grep -q "$KEY" /etc/hosts
