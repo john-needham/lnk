@@ -14,7 +14,7 @@ stop() {
 
 composer() {
     arr=("$@")
-    docker run --rm --interactive --tty --volume $PWD:/app composer ${arr[@]}
+    docker run --rm --interactive --tty --volume $PWD:/app __PROJECT___composer ${arr[@]}
 }
 
 artisan() {
@@ -34,8 +34,8 @@ exec() {
 }
 
 # call function
-gagCommand=$1
+cmdCommand=$1
 # remove first elem
 shift
-gagArgs=( "$@" )
-$gagCommand ${gagArgs[@]}
+cmdArgs=( "$@" )
+$cmdCommand ${cmdArgs[@]}

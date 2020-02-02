@@ -9,7 +9,7 @@ stop:
 	@docker-compose stop
 
 project:
-	docker-compose run composer sh -c "composer create-project --prefer-dist laravel/laravel tmp"
+	docker-compose run __PROJECT___composer sh -c "composer create-project --prefer-dist laravel/laravel tmp"
 	&& mv tmp/* ./
 	&& rm tmp
 
