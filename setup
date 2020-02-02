@@ -39,8 +39,8 @@ sed -i '' "s/${TEMPLATE}/${PROJECT}/g" "${PROJECT_PATH}/cmd"
 make build
 make project tmp=tmp
 shopt -s dotglob
-mv "${PROJECT_PATH}/tmp/*" "${PROJECT_PATH}/"
-rm "${PROJECT_PATH}/tmp"
+mv "./tmp/*" "."
+rm -r ./tmp
 make run
 
 if grep -q "$KEY" /etc/hosts
