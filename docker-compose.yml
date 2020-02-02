@@ -1,13 +1,13 @@
 version: '3.0'
 
 services:
-    nginx:
+    __PROJECT___nginx:
         image: nginx:latest
-        container_name: __PROJECT___nginx
+#        container_name: __PROJECT___nginx
         ports:
             - 80:80
         depends_on:
-            - php
+            - __PROJECT___php
         volumes:
             - .:/app/:cached
             - ./infra/etc/nginx/site.conf:/etc/nginx/conf.d/default.conf
@@ -16,31 +16,31 @@ services:
                 aliases:
                     - __PROJECT__.local
 
-    php:
+    __PROJECT___php:
         build: ./infra/docker/php
         container_name: __PROJECT___php
         working_dir: /app
         depends_on:
-            - mariadb
+            - __PROJECT___db
         volumes:
             - .:/app/:cached
             - ./infra/docker/volumes/php/composer:/root/.composer:cached
 
-    mariadb:
+    __PROJECT___db:
         image: mariadb:10.3.7
         ports:
             - 3306:3306
         volumes:
             - ./infra/docker/volumes/mariadb/data:/var/lib/mariadb
-        container_name: __PROJECT___db
+#        container_name: __PROJECT___db
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: __PROJECT__
             MYSQL_USER: __PROJECT__
             MYSQL_PASSWORD: password
 
-    composer:
-        container_name: __PROJECT___composer
+    __PROJECT___composer:
+#        container_name: __PROJECT___composer
         image: composer:latest
         command: install
         volumes:
