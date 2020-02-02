@@ -7,7 +7,7 @@ services:
         ports:
             - 80:80
         depends_on:
-            - php
+            - __PROJECT___php
         volumes:
             - .:/app/:cached
             - ./infra/etc/nginx/site.conf:/etc/nginx/conf.d/default.conf
