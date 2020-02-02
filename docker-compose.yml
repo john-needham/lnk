@@ -3,7 +3,7 @@ version: '3.0'
 services:
     __PROJECT___nginx:
         image: nginx:latest
-#        container_name: __PROJECT___nginx
+        container_name: __PROJECT___nginx
         ports:
             - 80:80
         depends_on:
@@ -32,7 +32,7 @@ services:
             - 3306:3306
         volumes:
             - ./infra/docker/volumes/mariadb/data:/var/lib/mariadb
-#        container_name: __PROJECT___db
+        container_name: __PROJECT___db
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: __PROJECT__
@@ -40,7 +40,7 @@ services:
             MYSQL_PASSWORD: password
 
     __PROJECT___composer:
-#        container_name: __PROJECT___composer
+        container_name: __PROJECT___composer
         image: composer:latest
         command: install
         volumes:
