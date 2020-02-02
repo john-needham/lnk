@@ -23,7 +23,7 @@ artisan() {
 }
 
 mysql() {
-    docker exec -it __PROJECT___mariadb_1 bash
+    docker exec -it __PROJECT___db_1 bash
 }
 
 exec() {

@@ -3,7 +3,7 @@ build:
 	@make -s clean
 
 run:
-	docker-compose up -d --build nginx php composer mariadb
+	docker-compose up -d --build __PROJECT___nginx __PROJECT___php __PROJECT___composer __PROJECT___db
 
 stop:
 	@docker-compose stop
