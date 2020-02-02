@@ -1,8 +1,16 @@
 #!/bin/sh
 
+if [ $# -eq 0 ]
+  then
+    echo "No project name supplied"
+fi
+
 PROJECT=$1;
 
 echo "Setting up $PROJECT ..."
+
+mkdir ${PROJECT}
+cd ${PROJECT}
 
 git clone git@github.com:john-needham/laravel-setup.git .
 
