@@ -9,6 +9,8 @@ PROJECT=$1;
 
 echo "Setting up $PROJECT ..."
 
+KEY="laravel-setup-script-project: ${PROJECT}"
+
 mkdir ${PROJECT}
 cd ${PROJECT}
 
@@ -31,9 +33,14 @@ mv ./tmp/* ./
 rm ./tmp
 make run
 
-echo "## laravel-setup-script-project: ${PROJECT}"  | sudo tee -a /etc/hosts
-echo "127.0.0.1 ${PROJECT}.local" | sudo tee -a /etc/hosts
-echo "## laravel-setup-script" | sudo tee -a /etc/hosts
-echo "" | sudo tee -a /etc/hosts
+if grep -q "$KEY" /etc/hosts
+then
+    echo "Host file already configured"
+else
+    echo "## laravel-setup-script-project: ${PROJECT}"  | sudo tee -a /etc/hosts
+    echo "127.0.0.1 ${PROJECT}.local" | sudo tee -a /etc/hosts
+    echo "## laravel-setup-script" | sudo tee -a /etc/hosts
+    echo "" | sudo tee -a /etc/hosts
+fi
 
 echo "Browse to http://${PROJECT}.local"
