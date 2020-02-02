@@ -21,7 +21,7 @@ services:
         container_name: __PROJECT___php
         working_dir: /app
         depends_on:
-            - db
+            - mariadb
         volumes:
             - .:/app/:cached
             - ./infra/docker/volumes/php/composer:/root/.composer:cached
