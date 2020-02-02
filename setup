@@ -4,11 +4,11 @@ PROJECT=$1;
 
 echo "Setting up $PROJECT ..."
 
-git clone git@github.com:john-needham/blank.git .
+git clone git@github.com:john-needham/laravel-setup.git .
 
 TEMPLATE="__PROJECT__"
 
-# remove setup script from blank, we dont need it
+# remove setup script from laravel-setup, we dont need it
 rm ./setup
 
 sed -i '' "s/${TEMPLATE}/${PROJECT}/g" ./docker-compose.yml

@@ -8,3 +8,5 @@ $ mkdir name
 $ cd name
 $ setup name
 ```
+
+Browse to `http://_name_.local`
