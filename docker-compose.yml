@@ -7,7 +7,7 @@ services:
         ports:
             - 80:80
         depends_on:
-            - __PROJECT___php
+            - php
         volumes:
             - .:/app/:cached
             - ./infra/etc/nginx/site.conf:/etc/nginx/conf.d/default.conf
@@ -21,7 +21,7 @@ services:
         container_name: __PROJECT___php
         working_dir: /app
         depends_on:
-            - __PROJECT___db
+            - db
         volumes:
             - .:/app/:cached
             - ./infra/docker/volumes/php/composer:/root/.composer:cached
