@@ -4,7 +4,6 @@ namespace Tests\Unit\Services\Links;
 
 use App\Services\Links\Token;
 use App\Services\Links\TokenValidator;
-use App\Services\Links\UidGenerator;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
 

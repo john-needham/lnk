@@ -2,13 +2,8 @@
 
 namespace Tests\Unit\Services\Links;
 
-use App\Exceptions\ModelParametersException;
-use App\Link;
-use App\Repositories\LinkRepository;
 use App\Services\Links\Token;
 use App\Services\Links\TokenGenerator;
-use App\Services\Links\UidGenerator;
-use Mockery as M;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
