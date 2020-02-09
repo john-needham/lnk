@@ -1,3 +1,5 @@
+![Tests](https://github.com/john-needham/lnk/workflows/Tests/badge.svg)
+
 # Lnk - A super simple shortlinker
 
 This is nothing more than a simple Laravel project.
