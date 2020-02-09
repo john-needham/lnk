@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Link;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/{link}', 'RedirectController@redirect')->name('redirect');
+
+Route::get('/{link}/{token}', 'AdminController@view')->name('view');
+
+Route::get('/', 'IndexController@index');
+Route::post('/', 'IndexController@create');
+
