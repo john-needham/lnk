@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Links\Token;
 use GuzzleHttp\Psr7\Uri;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
@@ -14,11 +15,10 @@ use Psr\Http\Message\UriInterface;
  * @property string uid
  * @property UriInterface url
  * @property UriInterface Shortlink
+ * @method static create(array $array)
  */
 class Link extends Model
 {
-    const UID_LENGTH = 6;
-
     /**
      * Set primary key as uid
      */
@@ -72,17 +72,23 @@ class Link extends Model
     }
 
     /**
-     * @return null
+     * @return Token
      */
-    public function getToken()
+    public function getToken() : Token
     {
-        return $this->token;
+        /**
+         * Return if defined
+         */
+        if(!is_null($this->token)) {
+            return $this->token;
+        }
+        return new Token($this->token_hash);
     }
 
     /**
-     * @param null $raw_token
+     * @param Token $token
      */
-    public function setToken($token): void
+    public function setToken(Token $token): void
     {
         $this->token = $token;
     }

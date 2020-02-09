@@ -5,7 +5,6 @@ build:
 run:
 	docker-compose up -d --build lnk_nginx lnk_php lnk_composer lnk_db
 	./cmd artisan migrate
-# 	docker-compose run lnk_php sh -c "cd app && php artisan migrate"
 
 stop:
 	@docker-compose stop
@@ -18,8 +17,9 @@ restart: stop run
 clean:
 	@docker system prune --volumes --force
 
+test:
+	docker-compose run lnk_php sh -c "vendor/bin/phpunit ./tests/"
+
 # test: run
 # 	docker-compose exec lnk_php sh -c "vendor/bin/phpunit ./tests/" || (docker-compose down --remove-orphans && exit 1)
 # 	docker-compose down --remove-orphans
-
-test: docker exec lnk_php sh -c "vendor/bin/phpunit ./tests/"

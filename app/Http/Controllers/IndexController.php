@@ -35,12 +35,13 @@ class IndexController extends Controller
      */
     public function create(CreateLinkRequest $request)
     {
-        // todo: where should this live? :thinking:
-        $model = $this->repository->createLink($request->post('url'));
+        $model = $this->repository->create([
+            'url' => $request->post('url')
+        ]);
 
         return redirect()->route('view', [
             'link' => $model->uid,
-            'token' => $model->getToken()
+            'token' => $model->getToken()->getOriginal()
         ]);
     }
 }

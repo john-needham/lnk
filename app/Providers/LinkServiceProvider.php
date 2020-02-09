@@ -16,10 +16,10 @@ class LinkServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(LinkRepository::class, function ($app) {
-            return new LinkRepository(
-                new EloquentRepository(new Link)
-            );
-        });
+//        $this->app->bind(LinkRepository::class, function ($app) {
+//            return new LinkRepository(
+//                new EloquentRepository(new Link)
+//            );
+//        });
     }
 }

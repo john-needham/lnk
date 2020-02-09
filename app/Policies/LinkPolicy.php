@@ -3,6 +3,8 @@
 namespace App\Policies;
 
 use App\Link;
+use App\Services\Links\Token;
+use App\Services\Links\TokenValidator;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Http\Request;
@@ -15,16 +17,22 @@ class LinkPolicy
      * @var Request
      */
     private $request;
+    /**
+     * @var TokenValidator
+     */
+    private $validator;
 
     /**
      * No user model, url has token
      *
      * LinkPolicy constructor.
      * @param Request $request
+     * @param TokenValidator $validator
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, TokenValidator $validator)
     {
         $this->request = $request;
+        $this->validator = $validator;
     }
 
     /**
@@ -39,16 +47,18 @@ class LinkPolicy
     }
 
     /**
-     * Determine whether the user can view the link.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Link  $link
-     * @return mixed
+     * @param User|null $user
+     * @param Link|null $link
+     * @return bool
+     * @throws \App\Exceptions\TokenAccessException
      */
     public function view(?User $user = null, ?Link $link = null)
     {
         // validate the request token against the model
-        return password_verify($this->request->token, $link->token_hash);
+        return $this->validator->validate(new Token(
+            $link->token_hash,
+            $this->request->token
+        ));
     }
 
     /**

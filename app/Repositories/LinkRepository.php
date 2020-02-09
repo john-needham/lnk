@@ -2,40 +2,73 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\ModelParametersException;
 use App\Link;
+use App\Services\Links\TokenGenerator;
+use App\Services\Links\UidGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Ramsey\Uuid\Uuid;
 
 /**
  * Class LinkRepository
  * @package App\Repositories
  */
-class LinkRepository
+class LinkRepository implements ModelRepositoryInterface
 {
     /**
-     * @var EloquentRepository
+     * @var Link
      */
-    private $repo;
+    private $model;
+    /**
+     * @var UidGenerator
+     */
+    private $uidGenerator;
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
-    public function __construct(EloquentRepository $repo)
+    /**
+     * LinkRepository constructor.
+     * @param Link $model
+     * @param UidGenerator $uidGenerator
+     * @param TokenGenerator $tokenGenerator
+     */
+    public function __construct(
+        Link $model,
+        UidGenerator $uidGenerator,
+        TokenGenerator $tokenGenerator
+    )
     {
-        $this->repo = $repo;
+        $this->model = $model;
+        $this->uidGenerator = $uidGenerator;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     /**
-     * @param Request $url
+     * @param array $data
      * @return Link
+     * @throws ModelParametersException
+     * @throws \App\Exceptions\InkException
      * @throws \Exception
      */
-    public function createLink($url) : Link
+    public function create(array $data = []) : Link
     {
-        $code = str_replace('-', '', Uuid::uuid4());
-        $token = Uuid::uuid4();
-        $tokenHash = password_hash($token, PASSWORD_DEFAULT);
+        $url = Arr::get($data, 'url');
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            throw new ModelParametersException('Invalid URL for link');
+        }
+
+        /**
+         * Generate simple auth token
+         */
+        $token = $this->tokenGenerator->generateToken();
+
         /** @var Link $model */
-        $model = $this->repo->create([
-            'token_hash' => $tokenHash,
-            'uid' => substr($code, 0, Link::UID_LENGTH),
+        $model = $this->model->create([
+            'token_hash' => $token->getHash(),
+            'uid' => $this->uidGenerator->generate(),
             'url' => $url
         ]);
         $model->setToken($token);
