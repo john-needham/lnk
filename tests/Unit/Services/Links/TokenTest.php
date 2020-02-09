@@ -37,8 +37,6 @@ class TokenTest extends TestCase
      */
     public function testOriginalException()
     {
-        $hash = 'hash';
-
         $token = $this->getToken('hash');
         $this->expectException(TokenAccessException::class);
         $token->getOriginal();
