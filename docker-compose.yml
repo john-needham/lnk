@@ -31,7 +31,7 @@ services:
         ports:
             - 3306:3306
         volumes:
-            - ./infra/docker/volumes/mariadb/data:/var/lib/mariadb
+            - lnk-datavolume:/var/lib/mariadb
         container_name: lnk_db
         environment:
             MYSQL_ROOT_PASSWORD: root
@@ -45,3 +45,5 @@ services:
         command: install
         volumes:
             - .:/app/
+volumes:
+    lnk-datavolume:
