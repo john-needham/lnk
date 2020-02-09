@@ -1,11 +1,13 @@
 <?php
 
-
 namespace App\Services\Links;
-
 
 use App\Exceptions\TokenAccessException;
 
+/**
+ * Class TokenValidator
+ * @package App\Services\Links
+ */
 class TokenValidator
 {
     /**
