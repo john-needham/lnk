@@ -11,3 +11,11 @@ This is nothing more than a simple Laravel project.
 - [ ] Count views
 - [ ] Show count on token'd page
 - [ ] Admin panel for viewing, resetting and deleting links 
+
+## Deploy locally
+
+  1. Clone repo
+  2. do.. ```
+    cd lnk && make run
+    ```
+  3. visit [localhost](http://localhost)
