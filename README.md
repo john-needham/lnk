@@ -21,3 +21,17 @@ This is nothing more than a simple Laravel project.
     cd lnk && make run
     ```
   3. visit [localhost](http://localhost)
+
+## Dev
+
+### tests
+make test
+
+### composer
+./cmd composer ...
+
+### artisan
+./cmd artisan ...
+
+### logs
+docker-compose logs -f
